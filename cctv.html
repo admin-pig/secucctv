@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹캠 스트리밍</title>
+    <style>
+        #video {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>웹캠 스트리밍</h1>
+    <video id="video" autoplay playsinline></video>
+
+    <script>
+        // 웹캠 스트리밍을 가져오는 함수
+        async function getWebcamStream() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const videoElement = document.getElementById('video');
+                videoElement.srcObject = stream;
+            } catch (error) {
+                console.error('웹캠 스트리밍을 가져오는 중 오류 발생:', error);
+            }
+        }
+
+        // 페이지 로드 시 웹캠 스트리밍을 가져옴
+        window.addEventListener('load', () => {
+            getWebcamStream();
+        });
+    </script>
+</body>
+</html>
